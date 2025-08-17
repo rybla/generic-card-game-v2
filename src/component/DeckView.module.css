@@ -1,0 +1,14 @@
+.DeckViewer {
+    padding: 16px;
+}
+
+.DeckViewer h2 {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.CardGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
