@@ -1,16 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
+import { authOptions } from "@/auth";
 import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
-import Google from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
-    providers: [
-        Google({
-            clientId: process.env.AUTH_GOOGLE_ID!,
-            clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-        }),
-    ],
-};
+const handler = NextAuth(authOptions);
 
-export const { handlers, auth, signIn, signOut } = await NextAuth(authOptions);
+export { handler as GET, handler as POST };

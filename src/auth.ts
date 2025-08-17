@@ -3,8 +3,18 @@ import {
     NextApiRequest,
     NextApiResponse,
 } from "next";
-import { getServerSession, Session } from "next-auth";
-import { authOptions } from "./app/api/auth/[...nextauth]/route";
+import { getServerSession, NextAuthOptions, Session } from "next-auth";
+import Google from "next-auth/providers/google";
+import env from "./env";
+
+export const authOptions: NextAuthOptions = {
+    providers: [
+        Google({
+            clientId: env.AUTH_GOOGLE_ID,
+            clientSecret: env.AUTH_GOOGLE_SECRET,
+        }),
+    ],
+};
 
 export function auth(
     ...args:
