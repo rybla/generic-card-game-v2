@@ -1,13 +1,9 @@
-import {
-    GetServerSidePropsContext,
-    NextApiRequest,
-    NextApiResponse,
-} from "next";
-import { getServerSession, NextAuthOptions, Session } from "next-auth";
+import NextAuth from "next-auth";
+import type { AuthOptions } from "next-auth";
 import Google from "next-auth/providers/google";
 import env from "./env";
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: AuthOptions = {
     providers: [
         Google({
             clientId: env.AUTH_GOOGLE_ID,
@@ -16,11 +12,10 @@ export const authOptions: NextAuthOptions = {
     ],
 };
 
-export function auth(
-    ...args:
-        | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
-        | [NextApiRequest, NextApiResponse]
-        | []
-): Promise<Session | null> {
-    return getServerSession(...args, authOptions);
-}
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+export const {
+    handlers: { GET, POST },
+    auth,
+    signIn,
+    signOut,
+} = NextAuth(authConfig);

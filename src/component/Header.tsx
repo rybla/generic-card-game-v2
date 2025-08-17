@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import SignOutButton from "./SignOutButton";
 
 export default async function Header(props: { subtitle: string }) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const session = await auth();
 
     return (
@@ -18,11 +19,13 @@ export default async function Header(props: { subtitle: string }) {
                 {/* TODO: links to other pages */}
             </div>
             <div className={styles.user}>
-                {session ? (
+                {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                {session?.user ? (
                     <>
                         <SignOutButton />
                         <div className={styles.username}>
-                            {session.user?.name ?? "Unnamed User"}
+                            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                            {session.user.name ?? "Unnamed User"}
                         </div>
                     </>
                 ) : (

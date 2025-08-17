@@ -1,9 +1,13 @@
-/* eslint-disable @typescript-eslint/require-await */
+"use server";
 
-export async function doSignIn() {
-    throw new Error("Not implemented");
+import { signIn, signOut } from "@/auth";
+
+export function doSignIn() {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    signIn("google");
 }
 
-export async function doSignOut() {
-    throw new Error("Not implemented");
+export function doSignOut() {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    signOut();
 }
