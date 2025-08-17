@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# generic-card-game-v2
 
-## Getting Started
+## Tech Stack
 
-First, run the development server:
+- project manager: [pnpm](https://pnpm.io)
+- web framework: [NextJS](https://nextjs.org)
+- auth: [next-auth](https://next-auth.js.org) with [Google sign-in](https://developers.google.com/identity/sign-in/web/sign-in)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Organization
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is a generic card game system.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The pages of the app:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- page `/`:
+    - The user must sign in
+    - A list of lobby games
+        - The user can click on a lobby game to join it.
+        - The user can click the "new game" button to create a new lobby game (by going to `/new`)
+    - If the player is a member of a game, then information about that game is presented in a side component next to the list of lobby games.
+        - If the player is the owner of that game, they have a button "start" which they can click to start the new game.
+- page `/new`:
+    - The user specifies the details of the new game, such as the name
+    - When the user is finished customizing the game, they click "submit". This creates a new LobbyGame with the user as its owner.
+    - The player is then redirected back to `/` where the lobby is.
+- page `/deck`:
+    - A page where the user can upload a deck file to view and edit in a nice GUI
+- page `/play/[gameId]`:
+    - This is where the actual game (of the route's specified `gameId`) is played once it is started.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Once you've made changes, run the script `./validate.sh`. This script must run successfully (NO warnings and NO errors) before you submit your changes.
