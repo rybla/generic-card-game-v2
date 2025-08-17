@@ -26,9 +26,11 @@ export default function Header(props: { subtitle: string }) {
                         <SignOutButton />
                         {session.user && (
                             <>
-                                <div className={styles.name}>
-                                    {session.user?.name ?? "Unnamed User"}
-                                </div>
+                                {session.user.name && (
+                                    <div className={styles.name}>
+                                        {session.user.name}
+                                    </div>
+                                )}
                                 {session.user.email && (
                                     <div className={styles.email}>
                                         {session.user.email}
@@ -48,9 +50,7 @@ export default function Header(props: { subtitle: string }) {
                         )}
                     </>
                 ) : (
-                    <>
-                        <SignInButton />
-                    </>
+                    <SignInButton />
                 )}
             </div>
         </div>
