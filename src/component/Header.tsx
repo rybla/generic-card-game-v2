@@ -1,11 +1,13 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import constants from "@/constants";
 import styles from "./Header.module.css";
 import SignInButton from "./SignInButton";
-import { auth } from "@/auth";
 import SignOutButton from "./SignOutButton";
 
-export default async function Header(props: { subtitle: string }) {
-    const session = await auth();
+export default function Header(props: { subtitle: string }) {
+    const { data: session } = useSession();
 
     return (
         <div className={styles.Header}>
