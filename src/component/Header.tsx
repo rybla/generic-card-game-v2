@@ -1,7 +1,8 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import constants from "@/constants";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import styles from "./Header.module.css";
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
@@ -23,9 +24,28 @@ export default function Header(props: { subtitle: string }) {
                 {session ? (
                     <>
                         <SignOutButton />
-                        <div className={styles.username}>
-                            {session.user?.name ?? "Unnamed User"}
-                        </div>
+                        {session.user && (
+                            <>
+                                <div className={styles.name}>
+                                    {session.user?.name ?? "Unnamed User"}
+                                </div>
+                                {session.user.email && (
+                                    <div className={styles.email}>
+                                        {session.user.email}
+                                    </div>
+                                )}
+                                {session.user.image && (
+                                    <div className={styles.image}>
+                                        <Image
+                                            src={session.user.image}
+                                            alt="User Avatar"
+                                            width={40}
+                                            height={40}
+                                        />
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </>
                 ) : (
                     <>
