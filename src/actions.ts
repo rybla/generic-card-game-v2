@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/require-await */
 
+import { auth } from "./auth";
 import { Game, GameId, UserId } from "./ontology";
+import { error, ok, Result } from "./utility";
 
 /**
  * Map of each game's {@link GameId} to the {@link Game} itself.
@@ -16,8 +18,21 @@ const userGames: Map<UserId, GameId> = new Map();
 /**
  * The session user creates a new {@link LobbyGame} with themselves as the first member.
  */
-export async function createLobbyGame(): Promise<GameId> {
-    throw new Error("Not implemented");
+export async function createLobbyGame(): Promise<Result<string, GameId>> {
+    const session = await auth();
+    if (!session) return error("no session");
+    if (!session.user) return error("no user");
+    if (!session.user.id) return error("no user id");
+
+    const gameId = Math.random().toString(36).substring(2, 15);
+
+    const lobbyGame: Game = {
+        type: "lobby",
+        gameId,
+        ownerId: session.user.id,
+    };
+
+    return ok(lobbyGame.gameId);
 }
 
 /**

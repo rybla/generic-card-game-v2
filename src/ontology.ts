@@ -6,8 +6,8 @@ export type CardId = string;
 export type ZoneId = string;
 
 export type Game = { gameId: GameId; ownerId: UserId } & (
-    | { status: "lobby" }
-    | { status: "active"; state: GameState }
+    | { type: "lobby" }
+    | { type: "active"; state: GameState }
 );
 
 export type GameState = {

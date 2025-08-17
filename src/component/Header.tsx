@@ -26,26 +26,32 @@ export default function Header(props: { subtitle: string }) {
                         <SignOutButton />
                         {session.user && (
                             <>
-                                {session.user.name && (
+                                {session.user.name !== undefined && (
                                     <div className={styles.name}>
                                         {session.user.name}
                                     </div>
                                 )}
-                                {session.user.email && (
+                                {/*{session.user.email !== undefined && (
                                     <div className={styles.email}>
                                         {session.user.email}
                                     </div>
-                                )}
-                                {session.user.image && (
-                                    <div className={styles.image}>
-                                        <Image
-                                            src={session.user.image}
-                                            alt="User Avatar"
-                                            width={40}
-                                            height={40}
-                                        />
+                                )}*/}
+                                {session.user.id !== undefined && (
+                                    <div className={styles.id}>
+                                        {session.user.id}
                                     </div>
                                 )}
+                                {session.user.image !== undefined &&
+                                    session.user.image !== null && (
+                                        <div className={styles.image}>
+                                            <Image
+                                                src={session.user.image}
+                                                alt="User Avatar"
+                                                width={40}
+                                                height={40}
+                                            />
+                                        </div>
+                                    )}
                             </>
                         )}
                     </>
