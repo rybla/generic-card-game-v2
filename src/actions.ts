@@ -6,12 +6,12 @@ import { error, ok, Result } from "./utility";
 /**
  * Map of each game's {@link GameId} to the {@link Game} itself.
  */
-const games: Map<GameId, Game> = new Map();
+export const games: Map<GameId, Game> = new Map();
 
 /**
  * Map of each user's {@link UserId} to the {@link GameId} of the game they are a member of (if any).
  */
-const userGames: Map<UserId, GameId> = new Map();
+export const userGames: Map<UserId, GameId> = new Map();
 
 /**
  * The session user creates a new {@link LobbyGame} with themselves as the first member.
